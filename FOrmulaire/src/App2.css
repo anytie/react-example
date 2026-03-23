@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(255, 215, 0, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(255, 107, 0, 0.10) 0%, transparent 55%),
+        #0f0f1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Container ───────────────────���───────────────────��── */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 40px 20px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Card ───��─────────────────────────────────────────�����─ */
+#card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px 28px 28px;
+    border-radius: 20px;
+    max-width: 300px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+
+    /* Holographic border */
+    background:
+        linear-gradient(#1e1e35, #1e1e35) padding-box,
+        linear-gradient(135deg, #FFD700, #FF6B00, #FFD700, #FF6B00) border-box;
+    border: 2px solid transparent;
+
+    /* Card depth */
+    box-shadow:
+        0 2px 0 #8a6200,
+        0 6px 0 #5a3f00,
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Shine sweep */
+#card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.07) 50%,
+            transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+}
+
+#card:hover::before {
+    transform: translateX(100%);
+}
+
+/* Numéro du Pokémon — premier h2 */
+#card h2:first-of-type {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #FFD700;
+    opacity: 0.7;
+}
+
+/* Nom du Pokémon — deuxième h2 */
+#card h2:last-of-type {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    text-transform: capitalize;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Image du Pokémon */
+#card img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 4px 16px rgba(255, 215, 0, 0.35));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#card img:hover {
+    transform: scale(1.08) translateY(-4px);
+    filter: drop-shadow(0 8px 24px rgba(255, 165, 0, 0.55));
+}
+
+/* ── Boutons ────���───────────────────��─────────────────── */
+.buttonsPok {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.buttonPok {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1a1a2e;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    padding: 13px 22px;
+    position: relative;
+    overflow: hidden;
+
+    background: #FFD700;
+    box-shadow:
+        0 3px 0 #a07800,
+        0 6px 16px rgba(255, 200, 0, 0.3);
+
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        background 0.22s ease,
+        color 0.22s ease;
+}
+
+.buttonPok::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.buttonPok:hover {
+    background: #FF6B00;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow:
+        0 5px 0 #b84700,
+        0 10px 24px rgba(255, 107, 0, 0.45);
+}
+
+.buttonPok:hover::after {
+    opacity: 1;
+}
+
+.buttonPok:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 1px 0 #a07800,
+        0 2px 8px rgba(255, 200, 0, 0.2);
+}

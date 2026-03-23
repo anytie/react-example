@@ -1,85 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=DM+Sans:wght@400;500&display=swap');
+
 * {
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{ 
-  background-color: #2CA1CC;
-  font-family: 'Roboto', sans-serif;
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(255, 215, 0, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(255, 107, 0, 0.08) 0%, transparent 55%),
+        #0f0f1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
 }
 
-.container{
-  width: 400px;
-  margin: auto;
-  margin-top: 50px;
-  padding-bottom: 30px;
-  background-color: #fff;
-  border-radius:5px;
-  color: #1F1F1F;
+/* ── Layout ──────────────��─────────────────────────────── */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 40px 20px;
 }
 
-.container h2 {
-  padding: 20px; 
-  text-align: center;
+/* ── Card ───────��──────────────────────────────────────── */
+#card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 22px 22px;
+    border-radius: 22px;
+    width: 320px;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(#1e1e35, #1e1e35) padding-box,
+        linear-gradient(135deg, #FFD700, #FF6B00, #FFD700, #FF6B00) border-box;
+    border: 2px solid transparent;
+    box-shadow:
+        0 2px 0 #8a6200,
+        0 6px 0 #5a3f00,
+        0 12px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: opacity 0.2s ease;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  margin: 10px 40px 0;
+#card.card--loading {
+    min-height: 320px;
+    justify-content: center;
 }
 
-.form input {
-  margin: 10px 0 20px;
-  padding: 10px;
-  width:90%;
-  background-color: #EAEDF2;
-  border: none;
-  border-radius:3px;
-  color:#A0A0A0;
+/* Shine sweep */
+#card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.06) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
 }
 
-.form textarea {
-  resize: none;
-  margin: 10px 0 20px;
-  padding: 10px;
-  width:90%;
-  height: 15vh;
-  background-color: #EAEDF2;
-  border: none;
-  border-radius:3px;
-  color:#A0A0A0;
+#card:hover::before {
+    transform: translateX(100%);
 }
 
-.form fieldset {
-  display: flex;
-  flex-direction: column;
-  border: none;
-  margin: 10px 0;
+/* ── Pokeball loader ───────────────────���────────────────── */
+*/ .card__loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.form fieldset legend {
-  margin-bottom: 5px;
+.pokeball {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #FFD700;
+    position: relative;
+    animation: spin 1s linear infinite;
+    overflow: hidden;
 }
 
-.form fieldset input {
-  width:fit-content;
-  margin: 10px 10px 7px 2px;
-}
-.form fieldset label {
-  width:fit-content;
+.pokeball__top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: #FF6B00;
 }
 
+.pokeball__bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: #1e1e35;
+}
 
-.form .submit-btn {
-  border:none;
-  padding: 10px;
-  border-radius:5px;
-  color:#F7F6FF;
-  cursor: pointer;
-  width: 96%;
-  margin-bottom:10px;
-  margin-top: 20px;
-  background-color: #19B8D6;
-  height: 37px;
+.pokeball__middle {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    height: 3px;
+    background: #FFD700;
+    z-index: 1;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Card Header ──���───────────────────��────────────────── */
+.card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card__number {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: #FFD700;
+    opacity: 0.6;
+}
+
+.card__types {
+    display: flex;
+    gap: 6px;
+}
+
+/* ── Type badges ───────────────────────────────────────�����── */
+.type-badge {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 50px;
+    color: #fff;
+}
+
+.type-badge--grass {
+    background: #5a9e4a;
+}
+
+.type-badge--poison {
+    background: #8b44a8;
+}
+
+.type-badge--fire {
+    background: #e2621b;
+}
+
+.type-badge--water {
+    background: #2980b9;
+}
+
+.type-badge--electric {
+    background: #c8a900;
+    color: #1a1a2e;
+}
+
+.type-badge--psychic {
+    background: #c0316e;
+}
+
+.type-badge--ice {
+    background: #3a9daa;
+}
+
+.type-badge--dragon {
+    background: #4a3fbf;
+}
+
+.type-badge--dark {
+    background: #3d2b1f;
+}
+
+.type-badge--fairy {
+    background: #b8527a;
+}
+
+.type-badge--normal {
+    background: #6e6e6e;
+}
+
+.type-badge--fighting {
+    background: #8e2020;
+}
+
+.type-badge--flying {
+    background: #4a6e9e;
+}
+
+.type-badge--ground {
+    background: #9e7a30;
+}
+
+.type-badge--rock {
+    background: #7a6a3a;
+}
+
+.type-badge--bug {
+    background: #5a7a1e;
+}
+
+.type-badge--ghost {
+    background: #3d3066;
+}
+
+.type-badge--steel {
+    background: #5a6e7a;
+}
+
+/* ── Name ───────────��──────────────────────────────────── */
+.card__name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: capitalize;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 24px rgba(255, 215, 0, 0.25);
+}
+
+/* ── Sprite ──────────��─────────────────────────────────── */
+.card__sprite-wrapper {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 215, 0, 0.12);
+}
+
+.card__sprite {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 4px 14px rgba(255, 215, 0, 0.3));
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.card__sprite:hover {
+    transform: scale(1.1) translateY(-4px);
+    filter: drop-shadow(0 8px 22px rgba(255, 165, 0, 0.55));
+}
+
+/* ── Info row ────────────────────���───────────────────��─── */
+.card__info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+.card__info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 2px;
+}
+
+.card__info-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.card__info-value {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.card__info-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ��─ Abilities ────────────────��───────────────────��────── */
+.card__abilities {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ability-badge {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    padding: 4px 12px;
+}
+
+.ability-badge--hidden {
+    color: #FFD700;
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.07);
+}
+
+/* ── Stats ─���───────────────────�──────────────────────── */
+.card__stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.stat-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 30px;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-row__name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: right;
+}
+
+.stat-row__bar-track {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.stat-row__bar-fill {
+    height: 100%;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #FFD700, #FF6B00);
+    transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.stat-row__value {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* ── Buttons ──���───────────────────�───────────────────── */
+.buttonsPok {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.buttonPok {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1a1a2e;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    padding: 13px 22px;
+    position: relative;
+    overflow: hidden;
+    background: #FFD700;
+    box-shadow: 0 3px 0 #a07800, 0 6px 16px rgba(255, 200, 0, 0.3);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.22s ease, color 0.22s ease;
+}
+
+.buttonPok:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.buttonPok:not(:disabled):hover {
+    background: #FF6B00;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 0 #b84700, 0 10px 24px rgba(255, 107, 0, 0.45);
+}
+
+.buttonPok:not(:disabled):active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #a07800, 0 2px 8px rgba(255, 200, 0, 0.2);
 }
