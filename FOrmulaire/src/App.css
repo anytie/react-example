@@ -1,85 +1,117 @@
-* {
-  margin: 0;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&display=swap');
+
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 200px;
 }
 
-body{ 
-  background-color: #2CA1CC;
-  font-family: 'Roboto', sans-serif;
+.pokemon {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    position: relative;
+    left: 35%;
+    width: 320px;
+    align-items: center;
+    border-radius: 30px;
+    align-content: center;
+    padding-top: 20px;
+    /*white nox shadow*/
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-.container{
-  width: 400px;
-  margin: auto;
-  margin-top: 50px;
-  padding-bottom: 30px;
-  background-color: #fff;
-  border-radius:5px;
-  color: #1F1F1F;
+.pokemon img {
+    width: 150px;
+    height: 150px;
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
-.container h2 {
-  padding: 20px; 
-  text-align: center;
+.pokemon img:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  margin: 10px 40px 0;
+.buttonSection {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 16px;
 }
 
-.form input {
-  margin: 10px 0 20px;
-  padding: 10px;
-  width:90%;
-  background-color: #EAEDF2;
-  border: none;
-  border-radius:3px;
-  color:#A0A0A0;
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-.form textarea {
-  resize: none;
-  margin: 10px 0 20px;
-  padding: 10px;
-  width:90%;
-  height: 15vh;
-  background-color: #EAEDF2;
-  border: none;
-  border-radius:3px;
-  color:#A0A0A0;
+.button:hover {
+    background-color: #45a049;
 }
 
-.form fieldset {
-  display: flex;
-  flex-direction: column;
-  border: none;
-  margin: 10px 0;
+.cardStats {
+    text-align: left;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 0 15px;
 }
 
-.form fieldset legend {
-  margin-bottom: 5px;
-}
-
-.form fieldset input {
-  width:fit-content;
-  margin: 10px 10px 7px 2px;
-}
-.form fieldset label {
-  width:fit-content;
+.statText {
+    font-family: 'Unbounded', sans-serif;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: capitalize;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px 10px;
 }
 
 
-.form .submit-btn {
-  border:none;
-  padding: 10px;
-  border-radius:5px;
-  color:#F7F6FF;
-  cursor: pointer;
-  width: 96%;
-  margin-bottom:10px;
-  margin-top: 20px;
-  background-color: #19B8D6;
-  height: 37px;
+.s {
+    border-radius: 5px;
 }
+
+.s:nth-child(1) {
+    background: linear-gradient(90deg, #c0392b, #e74c3c);
+}
+
+/* HP */
+.s:nth-child(2) {
+    background: linear-gradient(90deg, #e67e22, #f39c12);
+}
+
+/* ATK */
+.s:nth-child(3) {
+    background: linear-gradient(90deg, #2980b9, #3498db);
+}
+
+/* DEF */
+.s:nth-child(4) {
+    background: linear-gradient(90deg, #8e44ad, #9b59b6);
+}
+
+/* SpA */
+.s:nth-child(5) {
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+}
+
+/* SpD */
+.s:nth-child(6) {
+    background: linear-gradient(90deg, #f39c12, #f1c40f);
+}
+
+/* SPD */
