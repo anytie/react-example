@@ -61,18 +61,19 @@
     background-color: #45a049;
 }
 
-.cardStats {
+.s {
     text-align: left;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 0 15px;
+    border-radius: 5px;
 }
 
 .statText {
     font-family: 'Unbounded', sans-serif;
     margin-bottom: 10px;
-    font-size: 17px;
-    font-weight: 400;
+    font-size: 25px;
+    font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: capitalize;
     color: #ffffff;
@@ -81,9 +82,7 @@
 }
 
 
-.s {
-    border-radius: 5px;
-}
+
 
 .s:nth-child(1) {
     background: linear-gradient(90deg, #c0392b, #e74c3c);
@@ -114,4 +113,44 @@
     background: linear-gradient(90deg, #f39c12, #f1c40f);
 }
 
-/* SPD */
+
+
+
+.searchBar {
+    display: flex;
+    position: relative;
+    align-content: center;
+    flex-direction: column;
+    width: 400px;
+    align-items: center;
+    margin-left: 31%;
+    align-content: space-between;
+    gap: 20px
+}
+
+#searchname {
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+    border: 2px, solid, greenyellow;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+#searchname::placeholder {
+    color: #ffffff;
+    font-size: 15px;
+    font-family: 'Unbounded', sans-serif;
+}
+
+#searchname::value {
+    color: #ffffff;
+    font-size: 15px;
+    font-family: 'Unbounded', sans-serif;
+}
+
+#searchButton {
+    width: 150px;
+    border-radius: 5px;
+    border: none;
+
+}
