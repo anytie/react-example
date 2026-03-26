@@ -154,3 +154,16 @@
     border: none;
 
 }
+
+
+
+#searchButton:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
+
+#searchButton:active {
+    background-color: darkgray;
+
+}
