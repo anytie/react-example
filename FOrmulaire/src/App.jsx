@@ -1,13 +1,14 @@
 import React from "react"
+import { useState, useEffect } from "react"
 import "./App.css"
 
 export default function App() {
-    const [pokemonData, setPokemonData] = React.useState(null)
-    const [count, setCount] = React.useState(1)
-    const [isLoading, setIsLoading] = React.useState(true)
-    const [error, setError] = React.useState(null)
-    const [inputValue, setInputValue] = React.useState("")
-    const [query, setQuery] = React.useState(1)
+    const [pokemonData, setPokemonData] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(null)
+    const [inputValue, setInputValue] = useState("")
+    const [query, setQuery] = useState(1)
+    const [notFound, setNotFound] = useState(false)
 
     function decrease() {
         if (typeof query === "number" && query > 1) {
@@ -26,12 +27,20 @@ export default function App() {
     React.useEffect(() => {
         fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
             .then(res => {
+                if (res.status === 404) {
+                    setNotFound(true)
+                    return null
+                }
+                setNotFound(false)
                 if (!res.ok) {
                     throw new Error("Network response was not ok")
                 }
                 return res.json()
             })
             .then(data => {
+                if (data === null) {
+                    return
+                }
                 setPokemonData(data)
                 setQuery(data.id)
             })
@@ -58,6 +67,7 @@ export default function App() {
                     <div className="searchBar">
                         <input id="searchname" value={inputValue} onChange={(e) => setInputValue(e.target.value)} type="text" name="bar" placeholder="secrch for pockemon name"></input>
                         <button id="searchButton" value={""} onClick={handleSearch}>Search 🔍</button>
+                        {notFound && <p style={{ color: "red" }}>Pokémon introuvable !</p>}
                     </div>
                     <div className="pokemon">
                         <p>#{pokemonData.id}</p>
